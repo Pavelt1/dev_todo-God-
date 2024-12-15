@@ -1,7 +1,18 @@
 from fastapi import FastAPI
 import uvicorn
 
-app = FastAPI()
+from db import init_models
+from contextlib import asynccontextmanager
+
+@asynccontextmanager
+async def lifespan(app: FastAPI):
+    print("Включение")
+    await init_models()
+    print("База данных включилась")
+    yield
+    print("Выключение")
+
+app = FastAPI(lifespan=lifespan)
 
 
 if __name__ == "__main__":
