@@ -4,6 +4,8 @@ import uvicorn
 from db import init_models
 from contextlib import asynccontextmanager
 
+from router import router
+
 @asynccontextmanager
 async def lifespan(app: FastAPI):
     print("Включение")
@@ -13,6 +15,7 @@ async def lifespan(app: FastAPI):
     print("Выключение")
 
 app = FastAPI(lifespan=lifespan)
+app.include_router(router)
 
 
 if __name__ == "__main__":

@@ -1,6 +1,7 @@
 from datetime import datetime,date
 from pydantic import BaseModel
 
+
 class TodoRequest(BaseModel):
     title: str
     description: str
